@@ -1,6 +1,6 @@
 # vrc-udon-api
 
-# I'm working on build instructions and an easily implementable release as debugging this has been pure hell but right now this should give you some idea how this all works
+## I'm working on build instructions and an easily implementable release as debugging this has been pure hell but right now this should give you some idea how this all works
 
 This is a working demonstration of a CRUD API working in VRChat
 
