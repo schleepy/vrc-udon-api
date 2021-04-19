@@ -11,5 +11,6 @@ namespace VRCUdonAPI.Models.Settings
         public int ImageHeight { get; set; }
         public int BlockSize { get; set; }
         public string OutputDirectory { get; set; }
+        public bool AutoDelete { get; set; }
     }
 }

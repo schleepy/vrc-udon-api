@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using VRCUdonAPI.Extensions;
@@ -22,13 +23,21 @@ namespace VRCUdonAPI.Controllers
         public async Task<FileContentResult> GetEntityAsVideo(object entity)
         {
             string binaryStr = entity.ToString().ToBinary();
-            var image = ImageService.BinaryStringToImage(binaryStr);
+
+            Image image = ImageService.BinaryStringToImage(binaryStr);
+
             string imagePath = ImageService.SaveImageToFile(image);
-            string videoPath = await VideoService.CreateVideoFromImagesAsync(new List<string>() { imagePath });
+
+            string videoPath = await VideoService.CreateVideoFromImage(imagePath);
+
             byte[] bytes = await System.IO.File.ReadAllBytesAsync(videoPath);
-            // should really add this to a setting
-            System.IO.File.Delete(imagePath);
-            System.IO.File.Delete(videoPath);
+            
+            if (ImageService.ImageSettings.AutoDelete)
+                System.IO.File.Delete(imagePath);
+
+            if (ImageService.ImageSettings.AutoDelete)
+                System.IO.File.Delete(videoPath);
+            
             return File(bytes, "video/mp4");
         }
     }
