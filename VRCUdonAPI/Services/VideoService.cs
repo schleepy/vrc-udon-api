@@ -19,6 +19,11 @@ namespace VRCUdonAPI.Services
             FFmpegSettings = ffmpegSettings;
             VideoSettings = videoSettings;
             FFmpeg.SetExecutablesPath(ffmpegSettings.ExecutablesPath);
+
+            if (!Directory.Exists(VideoSettings.OutputDirectory))
+            {
+                Directory.CreateDirectory(VideoSettings.OutputDirectory);
+            }
         }
 
         public async Task<string> CreateVideoFromImagesAsync(List<string> images)

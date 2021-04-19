@@ -16,6 +16,12 @@ namespace VRCUdonAPI.Services
         public ImageService(ImageSettings imageSettings)
         {
             ImageSettings = imageSettings;
+
+            // Check if output directory exists, if not then we create it
+            if (!Directory.Exists(ImageSettings.OutputDirectory))
+            {
+                Directory.CreateDirectory(ImageSettings.OutputDirectory);
+            }
         }
 
         public Image BinaryStringToImage(string binaryString)
