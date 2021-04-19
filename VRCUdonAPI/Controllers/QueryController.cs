@@ -15,16 +15,18 @@ namespace VRCUdonAPI.Controllers
 {
     [ApiController]
     [Route("query/")]
-    public class QueryController : Controller
+    public class QueryController : CrudController
     {
         private QuerySettings Settings;
         private IQueryService QueryService;
         private readonly EndpointDataSource EndpointDataSource;
 
         public QueryController(
-            QuerySettings settings, 
             IQueryService queryService,
-            EndpointDataSource endpointDataSource)
+            ImageService imageService,
+            VideoService videoService,
+            QuerySettings settings, 
+            EndpointDataSource endpointDataSource) : base(imageService, videoService)
         {
             Settings = settings;
             EndpointDataSource = endpointDataSource;
@@ -70,7 +72,7 @@ namespace VRCUdonAPI.Controllers
         [HttpGet("dummy")]
         public async Task<IActionResult> GetDummyVideo()
         {
-            byte[] bytes = await System.IO.File.ReadAllBytesAsync("wwwroot/video/dumb.mp4");
+            byte[] bytes = await System.IO.File.ReadAllBytesAsync($"{VideoService.VideoSettings.OutputDirectory}/dumb.mp4");
             return File(bytes, "video/mp4");
         }
 
