@@ -37,13 +37,6 @@ namespace VRCUdonAPI
 
             services.AddMvc().AddControllersAsServices();
 
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = ".VUAAPI.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.IsEssential = true;
-            });
-
             var connectionString = Configuration.GetConnectionString("VSContext");
             services.AddDbContext<VUAContext>(options =>
                 options.UseSqlite(connectionString).EnableSensitiveDataLogging());
@@ -96,8 +89,6 @@ namespace VRCUdonAPI
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

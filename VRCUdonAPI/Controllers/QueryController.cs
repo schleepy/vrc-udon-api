@@ -33,7 +33,7 @@ namespace VRCUdonAPI.Controllers
 
         /// <summary>
         /// Builds a query and once the EOQ marker is hit tries to match it with
-        /// an existing endpoint and either redirects or returns a 404
+        /// an existing endpoint and either redirects or returns a dummy video
         /// </summary>
         [Route("build/{*input}")]
         public async Task<IActionResult> Build(string input)
@@ -56,10 +56,7 @@ namespace VRCUdonAPI.Controllers
 
             if (input == Settings.EOQMarker)
             {
-                // redirect to proper endpoint
-                // delete query from in memory db
-                // end
-                QueryService.Delete(query); // Delete the query as it's been built
+                QueryService.Delete(query);
                 return Run(query.Result);
             }
 
