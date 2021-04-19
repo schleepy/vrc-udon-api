@@ -353,3 +353,8 @@ MigrationBackup/
 *.asset
 *.asset.meta
 *.meta
+
+# Sqlite
+*.db
+*.db-shm
+*.db-wal
