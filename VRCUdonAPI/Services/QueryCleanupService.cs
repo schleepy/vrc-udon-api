@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VRCUdonAPI.Models.Entities;
+using VRCUdonAPI.Models.Settings;
 using VRCUdonAPI.Repositories;
 
 namespace VRCUdonAPI.Services
@@ -14,17 +15,19 @@ namespace VRCUdonAPI.Services
     public class QueryCleanupService : IHostedService, IDisposable
     {
         public Timer Timer { get; private set; }
+        public readonly QuerySettings Settings;
         private readonly IServiceProvider Services;
 
-        public QueryCleanupService(IServiceProvider services)
+        public QueryCleanupService(IServiceProvider services, QuerySettings querySettings)
         {
+            Settings = querySettings;
             Services = services;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
             Timer = new Timer(CheckForForgottenQueries, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(30));
+                TimeSpan.FromSeconds(Settings.RemovalThresholdInSeconds));
 
             return Task.CompletedTask;
         }
