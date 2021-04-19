@@ -11,9 +11,9 @@ namespace VRCUdonAPI.Services
 {
     public class QueryService : IQueryService
     {
-        private VUAContext Context { get; set; }
+        private QueryContext Context { get; set; }
 
-        public QueryService(VUAContext context)
+        public QueryService(QueryContext context)
         {
             Context = context;
         }

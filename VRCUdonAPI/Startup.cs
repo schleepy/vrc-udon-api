@@ -41,8 +41,8 @@ namespace VRCUdonAPI
             services.AddDbContext<VUAContext>(options =>
                 options.UseSqlite(connectionString).EnableSensitiveDataLogging());
 
-            // In memory context, perhaps helpful for building queries
-            //services.AddDbContext<InMemoryVUAContext>(opt => opt.UseInMemoryDatabase(databaseName: "InMemoryVUADatabase"));
+            services.AddDbContext<QueryContext>(options =>
+                options.UseInMemoryDatabase("InMemoryQueryContext"));
 
             // FFmpeg settings
             services.Configure<FFmpegSettings>(Configuration.GetSection("FFmpeg"));
