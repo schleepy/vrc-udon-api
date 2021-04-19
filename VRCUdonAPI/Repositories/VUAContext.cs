@@ -10,7 +10,6 @@ namespace VRCUdonAPI.Repositories
     public class VUAContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Query> Queries { get; set; }
         public VUAContext(DbContextOptions<VUAContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder mb)
