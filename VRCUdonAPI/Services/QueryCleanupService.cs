@@ -27,7 +27,7 @@ namespace VRCUdonAPI.Services
         public Task StartAsync(CancellationToken stoppingToken)
         {
             Timer = new Timer(CheckForForgottenQueries, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(Settings.RemovalThresholdInSeconds));
+                TimeSpan.FromSeconds(30));
 
             return Task.CompletedTask;
         }
@@ -38,7 +38,7 @@ namespace VRCUdonAPI.Services
             {
                 QueryContext context = scope.ServiceProvider.GetRequiredService<QueryContext>();
 
-                List<Query> outdatedQueries = await context.Queries.Where(q => (DateTime.UtcNow - q.WhenUpdated).Seconds > 20).ToListAsync();
+                List<Query> outdatedQueries = await context.Queries.Where(q => (DateTime.UtcNow - q.WhenUpdated).Seconds > Settings.RemovalThresholdInSeconds).ToListAsync();
 
                 if (outdatedQueries.Count() != 0)
                 {
