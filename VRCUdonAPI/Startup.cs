@@ -37,13 +37,6 @@ namespace VRCUdonAPI
 
             services.AddMvc().AddControllersAsServices();
 
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = ".VUAAPI.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.IsEssential = true;
-            });
-
             var connectionString = Configuration.GetConnectionString("VSContext");
             services.AddDbContext<VUAContext>(options =>
                 options.UseSqlite(connectionString).EnableSensitiveDataLogging());
@@ -71,8 +64,8 @@ namespace VRCUdonAPI
             services.AddSingleton(resolver =>
                 resolver.GetRequiredService<IOptions<ImageSettings>>().Value);
 
-            services.AddScoped<IImageService, ImageService>();
-            services.AddScoped<IVideoService, VideoService>();
+            services.AddScoped<ImageService>();
+            services.AddScoped<VideoService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IQueryService, QueryService>();
         }
@@ -96,8 +89,6 @@ namespace VRCUdonAPI
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

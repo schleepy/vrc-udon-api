@@ -9,19 +9,24 @@ using Xabe.FFmpeg;
 
 namespace VRCUdonAPI.Services
 {
-    public class VideoService : IVideoService
+    public class VideoService
     {
         private FFmpegSettings FFmpegSettings;
-        private VideoSettings VideoSettings;
+        public readonly VideoSettings VideoSettings;
 
         public VideoService(FFmpegSettings ffmpegSettings, VideoSettings videoSettings)
         {
             FFmpegSettings = ffmpegSettings;
             VideoSettings = videoSettings;
             FFmpeg.SetExecutablesPath(ffmpegSettings.ExecutablesPath);
+
+            if (!Directory.Exists(VideoSettings.OutputDirectory))
+            {
+                Directory.CreateDirectory(VideoSettings.OutputDirectory);
+            }
         }
 
-        public async Task<string> CreateVideoFromImagesAsync(List<string> images)
+        public async Task<string> CreateVideoFromImages(List<string> images)
         {
             string outputPath = Path.Combine(VideoSettings.OutputDirectory, $"{DateTime.Now.Ticks}.mp4");
 
@@ -40,7 +45,7 @@ namespace VRCUdonAPI.Services
 
         public async Task<string> CreateVideoFromImage(string image)
         {
-            return await CreateVideoFromImagesAsync(new List<string>() { image });
+            return await CreateVideoFromImages(new List<string>() { image });
         }
     }
 }

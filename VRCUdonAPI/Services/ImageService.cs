@@ -9,13 +9,19 @@ using VRCUdonAPI.Models.Settings;
 
 namespace VRCUdonAPI.Services
 {
-    public class ImageService : IImageService
+    public class ImageService
     {
-        private readonly ImageSettings ImageSettings;
+        public readonly ImageSettings ImageSettings;
 
         public ImageService(ImageSettings imageSettings)
         {
             ImageSettings = imageSettings;
+
+            // Check if output directory exists, if not then we create it
+            if (!Directory.Exists(ImageSettings.OutputDirectory))
+            {
+                Directory.CreateDirectory(ImageSettings.OutputDirectory);
+            }
         }
 
         public Image BinaryStringToImage(string binaryString)
