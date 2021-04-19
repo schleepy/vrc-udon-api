@@ -64,8 +64,8 @@ namespace VRCUdonAPI
             services.AddSingleton(resolver =>
                 resolver.GetRequiredService<IOptions<ImageSettings>>().Value);
 
-            services.AddScoped<IImageService, ImageService>();
-            services.AddScoped<IVideoService, VideoService>();
+            services.AddScoped<ImageService>();
+            services.AddScoped<VideoService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IQueryService, QueryService>();
         }

@@ -24,7 +24,7 @@ namespace VRCUdonAPI.Controllers
     {
         private readonly IUserService UserService;
 
-        public UserController(IImageService imageService, IVideoService videoService, IUserService userService) : base(imageService, videoService)
+        public UserController(ImageService imageService, VideoService videoService, IUserService userService) : base(imageService, videoService)
         {
             UserService = userService;
         }

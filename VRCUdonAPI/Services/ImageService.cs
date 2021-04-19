@@ -9,9 +9,9 @@ using VRCUdonAPI.Models.Settings;
 
 namespace VRCUdonAPI.Services
 {
-    public class ImageService : IImageService
+    public class ImageService
     {
-        private readonly ImageSettings ImageSettings;
+        public readonly ImageSettings ImageSettings;
 
         public ImageService(ImageSettings imageSettings)
         {

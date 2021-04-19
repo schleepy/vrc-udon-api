@@ -10,10 +10,10 @@ namespace VRCUdonAPI.Controllers
 {
     public class CrudController : Controller
     {
-        protected readonly IImageService ImageService;
-        protected readonly IVideoService VideoService;
+        protected readonly ImageService ImageService;
+        protected readonly VideoService VideoService;
 
-        public CrudController(IImageService imageService, IVideoService videoService) 
+        public CrudController(ImageService imageService, VideoService videoService) 
         {
             ImageService = imageService;
             VideoService = videoService;

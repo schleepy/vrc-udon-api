@@ -9,10 +9,10 @@ using Xabe.FFmpeg;
 
 namespace VRCUdonAPI.Services
 {
-    public class VideoService : IVideoService
+    public class VideoService
     {
         private FFmpegSettings FFmpegSettings;
-        private VideoSettings VideoSettings;
+        public readonly VideoSettings VideoSettings;
 
         public VideoService(FFmpegSettings ffmpegSettings, VideoSettings videoSettings)
         {
