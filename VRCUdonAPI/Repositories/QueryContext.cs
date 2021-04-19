@@ -3,24 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VRCUdonAPI.Models.Entities;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Query = VRCUdonAPI.Models.Entities.Query;
 
 namespace VRCUdonAPI.Repositories
 {
-    public class VUAContext : DbContext
+    public class QueryContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
         public DbSet<Query> Queries { get; set; }
-        public VUAContext(DbContextOptions<VUAContext> options) : base(options) { }
+        public QueryContext(DbContextOptions<QueryContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
             base.OnModelCreating(mb);
-
-            mb.Entity<User>(eb =>
-            {
-                eb.HasKey(a => a.Id);
-            });
 
             mb.Entity<Query>(eb =>
             {
