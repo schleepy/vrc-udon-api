@@ -68,6 +68,8 @@ namespace VRCUdonAPI
             services.AddScoped<VideoService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IQueryService, QueryService>();
+
+            services.AddHostedService<QueryCleanupService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
