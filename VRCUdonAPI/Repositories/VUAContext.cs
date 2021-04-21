@@ -10,7 +10,6 @@ namespace VRCUdonAPI.Repositories
     public class VUAContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Query> Queries { get; set; }
         public VUAContext(DbContextOptions<VUAContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder mb)
@@ -20,11 +19,6 @@ namespace VRCUdonAPI.Repositories
             mb.Entity<User>(eb =>
             {
                 eb.HasKey(a => a.Id);
-            });
-
-            mb.Entity<Query>(eb =>
-            {
-                eb.HasKey(c => c.Address);
             });
         }
     }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VRCUdonAPI.Repositories;
 
 namespace VRCUdonAPI.Migrations
 {
     [DbContext(typeof(VUAContext))]
-    partial class VUAContextModelSnapshot : ModelSnapshot
+    [Migration("20210419154150_removed_queries_from_main_context")]
+    partial class removed_queries_from_main_context
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
