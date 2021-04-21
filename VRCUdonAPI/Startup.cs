@@ -15,6 +15,7 @@ using VRCUdonAPI.Repositories;
 using VRCUdonAPI.Services;
 using Xabe.FFmpeg;
 using AutoMapper;
+using VRCUdonAPI.Middleware;
 
 namespace VRCUdonAPI
 {
@@ -70,19 +71,22 @@ namespace VRCUdonAPI
             services.AddScoped<VideoService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IQueryService, QueryService>();
+            services.AddScoped<IErrorService, ErrorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseMiddleware<ExceptionMiddleware>();
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                
+                app.UseMiddleware<ExceptionMiddleware>();
+
                 app.UseHsts();
             }
             //app.UseHttpsRedirection();
