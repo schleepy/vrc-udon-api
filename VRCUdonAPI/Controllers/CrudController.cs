@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,11 +14,13 @@ namespace VRCUdonAPI.Controllers
     {
         protected readonly ImageService ImageService;
         protected readonly VideoService VideoService;
+        protected readonly ILogger Logger;
 
-        public CrudController(ImageService imageService, VideoService videoService) 
+        public CrudController(ImageService imageService, VideoService videoService, ILogger<CrudController> logger)
         {
             ImageService = imageService;
             VideoService = videoService;
+            Logger = logger;
         }
 
         public async Task<FileContentResult> GetEntityAsVideo(object entity)

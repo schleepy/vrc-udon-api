@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,7 @@ namespace VRCUdonAPI.Controllers
     {
         private readonly IUserService UserService;
 
-        public UserController(ImageService imageService, VideoService videoService, IUserService userService) : base(imageService, videoService)
+        public UserController(ImageService imageService, VideoService videoService, IUserService userService, ILogger<UserController> logger) : base(imageService, videoService, logger)
         {
             UserService = userService;
         }
