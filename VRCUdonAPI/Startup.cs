@@ -37,6 +37,8 @@ namespace VRCUdonAPI
 
             services.AddMvc().AddControllersAsServices();
 
+            services.AddLogging();
+
             var connectionString = Configuration.GetConnectionString("VSContext");
             services.AddDbContext<VUAContext>(options =>
                 options.UseSqlite(connectionString).EnableSensitiveDataLogging());

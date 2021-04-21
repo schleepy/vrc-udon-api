@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Template;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,8 @@ namespace VRCUdonAPI.Controllers
             ImageService imageService,
             VideoService videoService,
             QuerySettings settings, 
-            EndpointDataSource endpointDataSource) : base(imageService, videoService)
+            EndpointDataSource endpointDataSource,
+            ILogger<QueryController> logger) : base(imageService, videoService, logger)
         {
             Settings = settings;
             EndpointDataSource = endpointDataSource;
