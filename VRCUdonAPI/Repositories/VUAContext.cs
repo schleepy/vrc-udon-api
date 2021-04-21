@@ -20,11 +20,6 @@ namespace VRCUdonAPI.Repositories
             {
                 eb.HasKey(a => a.Id);
             });
-
-            mb.Entity<Query>(eb =>
-            {
-                eb.HasKey(c => c.Address);
-            });
         }
     }
 }

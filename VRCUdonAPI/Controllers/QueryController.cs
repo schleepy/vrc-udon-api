@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Template;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using VRCUdonAPI.Models.Entities;
@@ -63,6 +64,7 @@ namespace VRCUdonAPI.Controllers
             }
 
             query.Result += input;
+            Console.WriteLine($"query {query.Result}");
 
             await QueryService.Update(query);
 
@@ -72,7 +74,7 @@ namespace VRCUdonAPI.Controllers
         [HttpGet("dummy")]
         public async Task<IActionResult> GetDummyVideo()
         {
-            byte[] bytes = await System.IO.File.ReadAllBytesAsync($"{VideoService.VideoSettings.OutputDirectory}/dumb.mp4");
+            byte[] bytes = await System.IO.File.ReadAllBytesAsync("wwwroot/video/637543648590688116.mp4");
             return File(bytes, "video/mp4");
         }
 
