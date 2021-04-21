@@ -22,9 +22,7 @@ namespace VRCUdonAPI.Controllers
 
         public async Task<FileContentResult> GetEntityAsVideo(object entity)
         {
-            string binaryStr = entity.ToString().ToBinary();
-
-            Image image = ImageService.BinaryStringToImage(binaryStr);
+            Image image = ImageService.GetObjectAsImage(entity);
 
             string imagePath = ImageService.SaveImageToFile(image);
 
