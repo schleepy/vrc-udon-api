@@ -50,6 +50,8 @@ namespace VRCUdonAPI.Controllers
             // Check if a query already exists if not build a new one
             if (query == default(Query))
             {
+                Logger.LogInformation($"New query from: {address} with input {input}");
+
                 query = await QueryService.Create(new Query
                 {
                     Address = address,
@@ -66,7 +68,8 @@ namespace VRCUdonAPI.Controllers
             }
 
             query.Result += input;
-            Console.WriteLine($"query {query.Result}");
+
+            Logger.LogInformation($"Query from {address} addition {query.Result}");
 
             await QueryService.Update(query);
 
@@ -76,7 +79,7 @@ namespace VRCUdonAPI.Controllers
         [HttpGet("dummy")]
         public async Task<IActionResult> GetDummyVideo()
         {
-            byte[] bytes = await System.IO.File.ReadAllBytesAsync("wwwroot/video/637543648590688116.mp4");
+            byte[] bytes = await System.IO.File.ReadAllBytesAsync("wwwroot/video/dumb.mp4");
             return File(bytes, "video/mp4");
         }
 
