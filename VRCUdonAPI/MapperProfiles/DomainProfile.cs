@@ -16,6 +16,8 @@ namespace VRCUdonAPI.MapperProfiles
             CreateMap<UserDto, User>();
             CreateMap<Query, QueryDto>();
             CreateMap<QueryDto, Query>();
+            CreateMap<Error, ErrorDto>();
+            CreateMap<ErrorDto, Error>();
         }
     }
 }

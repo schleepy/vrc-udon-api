@@ -2,49 +2,42 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VRCUdonAPI.Repositories;
 
 namespace VRCUdonAPI.Migrations
 {
     [DbContext(typeof(VUAContext))]
-    partial class VUAContextModelSnapshot : ModelSnapshot
+    [Migration("20210419154150_removed_queries_from_main_context")]
+    partial class removed_queries_from_main_context
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.5");
 
-            modelBuilder.Entity("VRCUdonAPI.Models.Entities.Error", b =>
+            modelBuilder.Entity("VRCUdonAPI.Models.Entities.Query", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Calls")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Created")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValueSql("datetime('now')");
-
-                    b.Property<string>("ExceptionMessage")
+                    b.Property<string>("Result")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ExceptionSource")
+                    b.Property<DateTime>("WhenCreated")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ExceptionType")
+                    b.Property<DateTime>("WhenUpdated")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ExceptionUrl")
-                        .HasColumnType("TEXT");
+                    b.HasKey("Address");
 
-                    b.Property<string>("InnerException")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Errors");
+                    b.ToTable("Query");
                 });
 
             modelBuilder.Entity("VRCUdonAPI.Models.Entities.User", b =>

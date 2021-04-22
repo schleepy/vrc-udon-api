@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace VRCUdonAPI.Repositories
     public class VUAContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Query> Queries { get; set; }
+        public DbSet<Error> Errors { get; set; }
         public VUAContext(DbContextOptions<VUAContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder mb)
@@ -22,9 +23,17 @@ namespace VRCUdonAPI.Repositories
                 eb.HasKey(a => a.Id);
             });
 
-            mb.Entity<Query>(eb =>
+            mb.Entity<Error>(eb =>
             {
-                eb.HasKey(c => c.Address);
+                eb.HasKey(e => e.Id);
+
+                eb.Property(e => e.Created)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValueSql("datetime('now')");
+
+                eb.Property(e => e.InnerException).HasConversion(
+                    l => JsonConvert.SerializeObject(l),
+                    l => JsonConvert.DeserializeObject<Exception>(l));
             });
         }
     }

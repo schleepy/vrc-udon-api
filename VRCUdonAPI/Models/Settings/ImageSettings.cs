@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace VRCUdonAPI.Models.Settings
 {
+    public enum ImageType
+    {
+        Binary,
+        ARGB
+    }
+
     public class ImageSettings
     {
         public int ImageWidth { get; set; }
@@ -12,5 +18,6 @@ namespace VRCUdonAPI.Models.Settings
         public int BlockSize { get; set; }
         public string OutputDirectory { get; set; }
         public bool AutoDelete { get; set; }
+        public ImageType ImageType { get; set; } = ImageType.Binary;
     }
 }
